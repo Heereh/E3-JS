@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100&display=swap');
+:root {
+  --bg-color: #131415;
+}
+
+body {
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container-pizzas {
+  display: flex;
+}
+
+.container-pizzas {
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 1200px;
+}
+
+.pizza {
+  position: relative;
+  max-width: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.pizza img {
+  width: 310px;
+  height: 300px;
+}
+.pizza-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+  width: 280px;
+  background: #fca311;
+  color: #f2f2f2;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.pizza-title h2 {
+  font-size: 24px;
+  line-height: 0px;
+  text-align: center;
+  width: 100%;
+}
+.pizza-ingredientes {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  padding: 4px 0 0 15px;
+  height: 100%;
+}
+
+.pizza-price {
+  font-size: 22px;
+  font-weight: 600;
+  padding: 0 28px 8px 0;
+  text-align: end;
+}
+
+.input-number {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  margin: 50px 20px 0 0;
+}
+
+.btn {
+  background-color: aquamarine;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #121212;
+  cursor: pointer;
+}
+.mensaje {
+  color: #c1121f;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 21px;
+  /* border: 1px solid red; */
+  /* padding: 20px 10px; */
+  display: none;
+}
+
+.showError {
+  display: block;
+}
