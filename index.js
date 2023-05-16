@@ -102,7 +102,10 @@ function verificationData(dataUser) {
 //@ Funciones generales
 
 const renderPizza = pizza => {
-  return (contenedorPizzas.innerHTML = `
+  if (pizza.length === 0) {
+    return false;
+  } else {
+    return (contenedorPizzas.innerHTML = `
         <div class="pizza">
           <img src=${pizza.imagen} alt="${pizza.nombre}" id="img" />
         </div> 
@@ -112,10 +115,12 @@ const renderPizza = pizza => {
           <div class="pizza-price"><span>Precio: $${pizza.precio} </span></div>
        </div>
     `);
+  }
 };
 
 const showPizza = e => {
   e.preventDefault();
+
   let dataUser = correctInput();
   if (verificationData(dataUser)) {
     renderPizza(findPizza(dataUser));
