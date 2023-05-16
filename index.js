@@ -4,10 +4,6 @@ const formPizza = document.querySelector('.form-pizza');
 const inputNumber = document.querySelector('.input-number');
 const contenedorPizzas = document.querySelector('.container-pizzas');
 
-/* 
-inputNumber.addEventListener('submit', () => {
-  console.log(inputNumber.value);
-}); */
 
 const pizzas = [
   {
