@@ -13,6 +13,13 @@ body {
   margin: 0;
 }
 
+.container form {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
 .container-pizzas {
   display: flex;
 }

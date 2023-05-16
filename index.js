@@ -4,7 +4,6 @@ const formPizza = document.querySelector('.form-pizza');
 const inputNumber = document.querySelector('.input-number');
 const contenedorPizzas = document.querySelector('.container-pizzas');
 
-
 const pizzas = [
   {
     id: 1,
@@ -55,11 +54,19 @@ const pizzas = [
 
 //@  Local Storage /
 
+let localPizza = JSON.parse(localStorage.getItem('pizza')) || [];
 
+const savePizzaLocalStorage = localPizza =>
+  localStorage.setItem('pizza', JSON.stringify(localPizza));
+
+resetLocalPizza = () =>
+  (localPizza = savePizzaLocalStorage.setItem('pizza', JSON.stringify([])));
 
 //@ Funciones auxiliares */
 
 function errorMensajes(input, message) {
+  inputNumber.value = '';
+  contenedorPizzas.innerHTML = '';
   const mensajesError = document.querySelector('.mensaje');
   mensajesError.classList.add('showError');
   mensajesError.textContent = message;
@@ -68,6 +75,9 @@ function errorMensajes(input, message) {
 function succesMessage() {
   const messageSuccess = document.querySelector('.mensaje');
   messageSuccess.classList.remove('showError');
+}
+function findPizza(dataUser) {
+  return pizzas.find(pizza => pizza.id == dataUser);
 }
 
 const correctInput = () => {
@@ -79,46 +89,46 @@ function verificationData(dataUser) {
 
   if (!dataUser.length) {
     errorMensajes(dataUser, 'Por favor ingrese un ID del 1 al 5');
+    resetLocalPizza();
     value = false;
-    formPizza.reset();
-    return;
-  } else if (!pizzas.find((pizza) => pizza.id == dataUser)) {
+  } else if (!findPizza(dataUser)) {
     errorMensajes(dataUser, 'Este ID no se encontro en la base de datos');
+    resetLocalPizza();
     value = false;
-    formPizza.reset();
-    return;
   }
   return value;
 }
+
 //@ Funciones generales
 
-const showPizza = (e) => {
-  e.preventDefault();
-  let dataUser = correctInput();
-  console.log(dataUser);
-  if (verificationData(dataUser)) {
-    const search = pizzas.find((pizza) => pizza.id == dataUser);
-    console.log(search);
-    contenedorPizzas.innerHTML = `
+const renderPizza = pizza => {
+  return (contenedorPizzas.innerHTML = `
         <div class="pizza">
-          <img src=${search.imagen} alt="${search.nombre}" id="img" />
+          <img src=${pizza.imagen} alt="${pizza.nombre}" id="img" />
         </div> 
         <div class="pizza-information">
-          <div class="pizza-title"><h2>${search.nombre}</h2></div>
-          <div class="pizza-ingredientes">Ingredientes: ${search.ingredientes} </div>
-          <div class="pizza-price"><span>Precio: $${search.precio} </span></div>
+          <div class="pizza-title"><h2>${pizza.nombre}</h2></div>
+          <div class="pizza-ingredientes">Ingredientes: ${pizza.ingredientes} </div>
+          <div class="pizza-price"><span>Precio: $${pizza.precio} </span></div>
        </div>
-    `;
-  
+    `);
+};
+
+const showPizza = e => {
+  e.preventDefault();
+  let dataUser = correctInput();
+  if (verificationData(dataUser)) {
+    renderPizza(findPizza(dataUser));
+    savePizzaLocalStorage(findPizza(dataUser));
     succesMessage();
-    formPizza.reset();
   }
 };
 
 //@ Funcion init
 
 const init = () => {
-
+  savePizzaLocalStorage(localPizza);
+  renderPizza(localPizza);
   formPizza.addEventListener('submit', showPizza);
 };
 
