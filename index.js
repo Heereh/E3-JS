@@ -59,8 +59,8 @@ let localPizza = JSON.parse(localStorage.getItem('pizza')) || [];
 const savePizzaLocalStorage = localPizza =>
   localStorage.setItem('pizza', JSON.stringify(localPizza));
 
-resetLocalPizza = () =>
-  (localPizza = savePizzaLocalStorage.setItem('pizza', JSON.stringify([])));
+const resetLocalPizza = () =>
+  (localPizza = localStorage.setItem('pizza', JSON.stringify([])));
 
 //@ Funciones auxiliares */
 
@@ -91,10 +91,12 @@ function verificationData(dataUser) {
     errorMensajes(dataUser, 'Por favor ingrese un ID del 1 al 5');
     resetLocalPizza();
     value = false;
+    return;
   } else if (!findPizza(dataUser)) {
     errorMensajes(dataUser, 'Este ID no se encontro en la base de datos');
     resetLocalPizza();
     value = false;
+    return;
   }
   return value;
 }
@@ -103,7 +105,7 @@ function verificationData(dataUser) {
 
 const renderPizza = pizza => {
   if (pizza.length === 0) {
-    return false;
+    return;
   } else {
     return (contenedorPizzas.innerHTML = `
         <div class="pizza">
